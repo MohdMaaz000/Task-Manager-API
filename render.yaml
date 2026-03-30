@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: task-manager-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn wsgi:app
+    healthCheckPath: /health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        value: sqlite:///task_manager_api.db
+      - key: JWT_ACCESS_TOKEN_EXPIRES_MINUTES
+        value: "30"
+      - key: JWT_REFRESH_TOKEN_EXPIRES_DAYS
+        value: "30"
+      - key: RATELIMIT_STORAGE_URI
+        value: memory://
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: LOG_LEVEL
+        value: INFO
+      - key: CREATE_DB_ON_STARTUP
+        value: "true"
