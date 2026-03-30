@@ -7,6 +7,12 @@ Production-style REST API for task management built with Python, Flask, SQLAlche
 - GitHub: `https://github.com/MohdMaaz000/Task-Manager-API`
 - Maintainer: `Mohd Maaz`
 
+## Live API
+
+- Base URL: `https://task-manager-api-hl7l.onrender.com`
+- Landing Page: `https://task-manager-api-hl7l.onrender.com/`
+- Health Check: `https://task-manager-api-hl7l.onrender.com/health`
+
 ## Highlights
 
 - User registration and login with JWT access and refresh tokens
