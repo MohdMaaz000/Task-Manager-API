@@ -1,6 +1,6 @@
 from datetime import date
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from flask_jwt_extended import (
     JWTManager,
@@ -109,7 +109,7 @@ def register_jwt_handlers(jwt):
 def register_routes(app):
     @app.route("/")
     def home():
-        return {"status": "API running"}
+        return render_template("home.html")
 
     @app.route("/health", methods=["GET"])
     def health_check():

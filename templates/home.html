@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager API</title>
+    <style>
+        :root {
+            --bg: #0b1220;
+            --panel: rgba(15, 23, 42, 0.82);
+            --panel-border: rgba(148, 163, 184, 0.18);
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --accent: #22c55e;
+            --accent-soft: rgba(34, 197, 94, 0.14);
+            --secondary: #38bdf8;
+            --shadow: 0 30px 80px rgba(2, 6, 23, 0.45);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(56, 189, 248, 0.25), transparent 28%),
+                radial-gradient(circle at top right, rgba(34, 197, 94, 0.16), transparent 24%),
+                linear-gradient(160deg, #020617 0%, #0f172a 52%, #111827 100%);
+        }
+
+        .page {
+            width: min(1100px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 48px 0 64px;
+        }
+
+        .hero {
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            border-radius: 24px;
+            padding: 36px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(14px);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            border: 1px solid rgba(34, 197, 94, 0.22);
+            color: #dcfce7;
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 14px rgba(34, 197, 94, 0.8);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2.1rem, 4vw, 4rem);
+            line-height: 1.06;
+        }
+
+        .hero p {
+            margin: 0;
+            max-width: 780px;
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .button {
+            text-decoration: none;
+            color: #f8fafc;
+            padding: 12px 18px;
+            border-radius: 14px;
+            border: 1px solid transparent;
+            transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+        }
+
+        .button.primary {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+        }
+
+        .button.secondary {
+            background: rgba(15, 23, 42, 0.78);
+            border-color: rgba(56, 189, 248, 0.32);
+            color: #dbeafe;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .grid {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            margin-top: 28px;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.74);
+            border: 1px solid var(--panel-border);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 1.05rem;
+        }
+
+        .card p,
+        .card li {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .card ul {
+            padding-left: 18px;
+            margin: 10px 0 0;
+        }
+
+        .endpoint-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .endpoint-list li {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 11px 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .endpoint-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .method {
+            font-weight: 700;
+            color: var(--secondary);
+            min-width: 52px;
+        }
+
+        .path {
+            color: var(--text);
+            word-break: break-word;
+        }
+
+        footer {
+            margin-top: 22px;
+            color: var(--muted);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <section class="hero">
+            <div class="status-pill">
+                <span class="status-dot"></span>
+                API is live and responding
+            </div>
+            <h1>Task Manager API</h1>
+            <p>
+                A production-style Flask REST API for authentication and task management.
+                It provides JWT-secured endpoints for user auth, task CRUD operations,
+                filtering, analytics, and health monitoring.
+            </p>
+            <div class="actions">
+                <a class="button primary" href="/health">Open Health Check</a>
+                <a class="button secondary" href="https://github.com/MohdMaaz000/Task-Manager-API" target="_blank" rel="noreferrer">View GitHub Repository</a>
+            </div>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <h2>Core Features</h2>
+                <ul>
+                    <li>JWT authentication with access and refresh tokens</li>
+                    <li>Protected task CRUD, filtering, and statistics</li>
+                    <li>Validation, rate limiting, and health checks</li>
+                    <li>Hosted deployment with Render</li>
+                </ul>
+            </article>
+
+            <article class="card">
+                <h2>Tech Stack</h2>
+                <ul>
+                    <li>Python, Flask, SQLAlchemy</li>
+                    <li>Flask-JWT-Extended</li>
+                    <li>Flask-Limiter and Flask-Migrate</li>
+                    <li>Render deployment and GitHub CI</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <h2>Main Endpoints</h2>
+                <ul class="endpoint-list">
+                    <li><span class="method">GET</span><span class="path">/health</span></li>
+                    <li><span class="method">POST</span><span class="path">/auth/register</span></li>
+                    <li><span class="method">POST</span><span class="path">/auth/login</span></li>
+                    <li><span class="method">GET</span><span class="path">/auth/me</span></li>
+                    <li><span class="method">GET</span><span class="path">/tasks</span></li>
+                    <li><span class="method">POST</span><span class="path">/tasks</span></li>
+                    <li><span class="method">GET</span><span class="path">/tasks/stats</span></li>
+                </ul>
+            </article>
+
+            <article class="card">
+                <h2>Usage</h2>
+                <p>
+                    Test the API with Postman or connect it to a frontend client.
+                    Start with <strong>/auth/register</strong>, then <strong>/auth/login</strong>,
+                    and use the returned bearer token for protected task routes.
+                </p>
+                <p>
+                    Live base URL:<br>
+                    <strong>https://task-manager-api-hl7l.onrender.com</strong>
+                </p>
+            </article>
+        </section>
+
+        <footer>
+            Built and deployed by Mohd Maaz
+        </footer>
+    </main>
+</body>
+</html>

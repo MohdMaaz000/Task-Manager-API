@@ -62,6 +62,13 @@ class APITestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_json()["status"], "ok")
 
+    def test_home_page_renders(self):
+        response = self.client.get("/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b"Task Manager API", response.data)
+        self.assertIn(b"API is live and responding", response.data)
+
     def test_register_and_login_flow(self):
         register_response = self.register_user()
         login_response = self.login_user()
