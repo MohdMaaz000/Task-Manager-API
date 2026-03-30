@@ -2,6 +2,11 @@
 
 Production-style REST API for task management built with Python, Flask, SQLAlchemy, JWT authentication, and automated tests.
 
+## Repository
+
+- GitHub: `https://github.com/MohdMaaz000/Task-Manager-API`
+- Maintainer: `Mohd Maaz`
+
 ## Highlights
 
 - User registration and login with JWT access and refresh tokens
@@ -87,7 +92,7 @@ git init
 git add .
 git commit -m "Initial production-style Task Manager API"
 git branch -M main
-git remote add origin <your-github-repo-url>
+git remote add origin https://github.com/MohdMaaz000/Task-Manager-API.git
 git push -u origin main
 ```
 
@@ -124,7 +129,7 @@ git push -u origin main
 
 ```json
 {
-  "title": "Prepare internship resume",
+  "title": "Prepare project documentation",
   "priority": "HIGH",
   "due_date": "2026-04-15"
 }
